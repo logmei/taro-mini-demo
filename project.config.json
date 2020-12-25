@@ -1,7 +1,7 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "tms-driver-app",
-	"description": "金鹿物流司机端",
+	"projectname": "demo-app",
+	"description": "小程序",
 	"appid": "touristappid",
 	"setting": {
 		"urlCheck": true,

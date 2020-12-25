@@ -1,8 +1,8 @@
 {
-  "name": "tms-driver-app",
+  "name": "demo-app",
   "version": "1.0.0",
   "private": true,
-  "description": "金鹿物流司机端",
+  "description": "小程序",
   "templateInfo": {
     "name": "taro-ui",
     "typescript": true,
