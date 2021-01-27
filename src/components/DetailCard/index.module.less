@@ -1,0 +1,54 @@
+@import '../../base.less';
+
+.DetailCard{
+  background: #fff;
+  padding: 25px 30px;
+  position: relative;
+  .content{
+    line-height: 50px;
+    font-size: 24px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .left{
+      flex-grow: 1;
+       .title{
+          font-size: 30px;
+          color: #666;
+          font-weight: 500;
+        }
+      .subtitle{
+        color: #666;
+      }
+    }
+    .right{
+      flex-shrink: 1;
+      align-self: center;
+
+    }
+    .statusStyle{
+      // color: #fff;
+      // background: @default-color;
+      padding: 0 20px;
+      font-size: 24px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .suffixStatusStyle{
+      font-size: 24px;
+      position: absolute;
+      right: 30px;
+      bottom: 20px;
+    }
+  }
+
+
+  .children{
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+  }
+
+}

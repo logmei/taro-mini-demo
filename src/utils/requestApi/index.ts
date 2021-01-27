@@ -2,7 +2,17 @@ import Taro from '@tarojs/taro'
 import { RequestOptParams } from '../../global/data';
 import Config from './config'
 
-const { request } = Taro
+const { request, uploadFile } = Taro
+// 获取当前帐号信息
+const accountInfo = Taro.getAccountInfoSync();
+
+// env类型
+export const env = accountInfo.miniProgram.envVersion;
+console.log('...........................',env)
+if(!env){
+  console.error("获取运行环境失败!");
+}
+export const apiUrl = process.env.NODE_ENV === 'production' && env?Config[env].apiUrl:Config[process.env.NODE_ENV].apiUrl
 
 export const codeMessage = {
   // 200: '服务器成功返回请求的数据。',
@@ -24,19 +34,31 @@ export const codeMessage = {
 
 const interceptor = function (chain) {
   const requestParams = chain.requestParams
-  const { method, data, url } = requestParams
+  // const { method, data, url } = requestParams
 
-  console.log(`http ${method || 'GET'} --> ${url} data: `, data,requestParams)
+  // console.log(`http ${method || 'GET'} --> ${url} data: `, data,requestParams)
 
   return chain.proceed(requestParams)
     .then(response => {
-      console.log(`http <-- ${url} result:`, response)
+      // console.log(`http <-- ${url} result:`, response)
 
       //返回解析后的数据
-      if (response.status === 200) {
+      if (response.statusCode === 200 || response.statusCode === 204) {
         return response.data;
-      }else if(codeMessage[response.status]){
-        const errorText = codeMessage[response.status] || response.statusText;
+      }else if(response.statusCode === 401){
+        Taro.clearStorageSync()
+        Taro.showToast({
+          title: '登录过期',
+          icon: "none",
+          duration: 2000,
+          success: function () {
+            Taro.redirectTo({
+              url:'/pages/login/index'
+            })
+          }
+        })
+      }else if(codeMessage[response.statusCode]){
+        const errorText = codeMessage[response.statusCode] || response.statusText;
         Taro.showToast({
           title:errorText,
           icon:'none',
@@ -50,18 +72,28 @@ const interceptor = function (chain) {
       return response
     }).catch(err => {
       //  if(data.loading === true && !loading) Taro.hideLoading()
-
+      Taro.atMessage({
+        'message': err,
+        'type': 'error',
+      })
       throw err;
+      return Promise.reject(err);
     });
   }
 Taro.addInterceptor(interceptor)
 
-const Request = async (url:string,options:RequestOptParams,rest)=>{
-  const wholeUrl = Config[process.env.NODE_ENV] + url;
-  const method = options.method ? options.method : 'get'
+const Request:any = async (url:string,option:RequestOptParams,rest?:any)=>{
+  const options = {...option}
+  const wholeUrl = apiUrl + url;
+  const method = (options && options.method) ? options.method : 'get'
+  const authorization = Taro.getStorageSync('access_token')
+  const companyId = Taro.getStorageSync('companyId')
+  //'application/x-www-form-urlencoded'
   const header = {
-    'content-type': options.dataType?'application/x-www-form-urlencoded':'application/json',
-    'authorization':Taro.getStorageSync('userToken')
+    'content-type': options.contentType || 'application/json',
+    'authorization':authorization,
+    'end':'driver',
+    'companyId':companyId
   }
   return await request({
     header,
@@ -72,4 +104,70 @@ const Request = async (url:string,options:RequestOptParams,rest)=>{
   });
 }
 
-export default Request
+export default Request;
+
+
+
+const UploadFileApi = async (url:string,option:RequestOptParams,rest?:any)=>{
+  const options = {...option}
+  const wholeUrl = apiUrl + url;
+  const authorization = Taro.getStorageSync('access_token')
+  const companyId = Taro.getStorageSync('companyId')
+  const header = {
+    'content-type': 'multipart/form-data',
+    'authorization':authorization,
+    'end':'driver',
+    'companyId':companyId
+  }
+  // Taro.showModal({
+  //   content:'调用地址'+wholeUrl
+  // })
+  return await uploadFile({
+    header,
+    url:wholeUrl,
+    name:'file',
+    formData: { ...options.data },
+    filePath:option.filePath || ''
+  }).then(response=>{
+    // Taro.showModal({
+    //   content:'返回结果'+JSON.stringify(response)
+    // })
+    //返回解析后的数据
+    if (response.statusCode === 200 || response.statusCode === 204) {
+      return response.data;
+    }else if(response.statusCode === 401){
+      Taro.clearStorageSync()
+      Taro.showToast({
+        title: '登录过期',
+        icon: "none",
+        duration: 2000,
+        success: function () {
+          Taro.redirectTo({
+            url:'/pages/login/index'
+          })
+        }
+      })
+    }else if(codeMessage[response.statusCode]){
+      const errorText = codeMessage[response.statusCode] || 'error';
+      Taro.showToast({
+        title:errorText,
+        icon:'none',
+        duration:2000
+      })
+      return Promise.reject(response.data);
+    }else {
+      //统一处理错误,或者返回 reject
+      return Promise.reject(response.data);
+    }
+    return response
+  }).catch(err=>{
+    Taro.atMessage({
+      'message': err,
+      'type': 'error',
+    })
+  });
+}
+
+export {
+  UploadFileApi
+}

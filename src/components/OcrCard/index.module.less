@@ -1,0 +1,47 @@
+
+.OcrCardStyle{
+  background: #fff;
+  box-sizing: border-box;
+  .title{
+    font-size: 43px;
+    color: #333;
+  }
+  .subTitle{
+    font-size:25px ;
+    color: #333;
+    margin: 20px 0;
+  }
+  .disabled{
+    &::before,&::after{
+      display: none;
+    }
+  }
+  .ocrImageSelect{
+    position: relative;
+    border: 1px dashed #C7CBD1;
+    height: 500px;
+    text-align: center;
+    .image{
+      height: 500px;
+      width: 100%;
+    }
+    &::before{
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 20%;
+      background: #C7CBD1;
+      top: 185px;
+      left: 50%;
+    }
+    &::after{
+      content: '';
+      position: absolute;
+      width: 20%;
+      height: 5px;
+      background: #C7CBD1;
+      top: 230px;
+      left: 40%;
+    }
+  }
+}
