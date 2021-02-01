@@ -17,8 +17,19 @@
     width: 3px;
     background: @primary-color ;
     animation: animate .8s infinite;
-    margin-top: 20%;
+    position: absolute;
+    top: 20%;
     display: inline-block;
+  }
+
+  .selected{
+    .text{
+      background: rgba(82, 23, 240, 0.5);
+      border-left: 2px solid #5217F0;
+      border-right: 2px solid rgb(82, 23, 240);
+      padding: 0 8px;
+    }
+    
   }
 
   @keyframes animate {
@@ -36,19 +47,20 @@
     text-align: center;
     line-height: 80px;
     font-size: 43px;
+    position: relative;
   }
   .hideInput{
     position: absolute;
-    top:0px;
-    left: 0px;
+    top: 100px;
+    left: -2500px;
     border: 2px solid;
     position: absolute;
     /* border: 2rpx solid #fff; */
     height: 100px;
     width: 100%;
     color: transparent;
-    font-size: 4px;
-    caret-color:transparent;
+    font-size: 30px;
+    // caret-color:transparent;
   }
 //   .input{
 //   width: 81px;
@@ -66,3 +78,32 @@
 //   }
 // }
 }
+
+
+.foreLetterSeparate{
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 20px;
+  width: 60%;
+  min-width: 300px;
+  margin: auto;
+  // margin-bottom: 20px;
+ 
+  .input{
+  width: 81px;
+  height: 81px;
+  border: 2px solid @border-color;
+  border-radius: 14px;
+  :global{
+    color: @primary-color ;
+    text-align: center;
+    font-size: 43px;
+    .at-input__container,.at-input__input{
+      height: 100%;
+      font-size: 43px;
+    }
+  }
+}
+}
+
