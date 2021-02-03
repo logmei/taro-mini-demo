@@ -17,11 +17,13 @@ const colors = ['#A5C2C2','#BBD1A1','#A6A5E5','#D1B29A']
 const ForeLetterInput:React.FC<ForeLetterInputProps> = ({num=4,value,onChange,focus,disabled})=>{
 
   const [val,setVal] = useState<string>(value||'');
-  const [isFocus,setIsFocus] = useState<boolean>(focus||false)
+  const [isFocus] = useState<boolean>(focus||false)
   const [showCursor ,setShowCursor] = useState<boolean>(focus||false)
   const [defaultArr] = useState<Array<string>>(new Array(num).fill(''))
   const [focusPosition,setFocusPosition] = useState<number>(0)
   const [handChoose,setHandChoose] = useState<boolean>(false)
+  const [selectionStart,setSelectionStart] = useState<number>(0)
+  const [selectionEnd,setSelectionEnd] = useState<number>(0)
   const inputRef = useRef<any>(null)
 
   const onInputChange = (e:any)=>{
@@ -33,9 +35,18 @@ const ForeLetterInput:React.FC<ForeLetterInputProps> = ({num=4,value,onChange,fo
       setHandChoose(false)
     }
     if(e.detail.keyCode===8){
-      setFocusPosition(pos=>pos-1)
+      setHandChoose(false)
+      if(newVal.length===0) return
+      const currentPos = focusPosition-1
+      setFocusPosition(currentPos)
+      setSelectionStart(currentPos)
+      setSelectionEnd(currentPos)
     }else{
-      setFocusPosition(pos=>pos+1)
+      if(newVal.length===num) return
+      const currentPos = focusPosition+1
+      setFocusPosition(currentPos)
+      setSelectionStart(currentPos)
+      setSelectionEnd(currentPos)
     }
     // setFocusPosition(newVal.length)
     // return newVal
@@ -45,6 +56,8 @@ const ForeLetterInput:React.FC<ForeLetterInputProps> = ({num=4,value,onChange,fo
     console.log('HandlerClick.....',index)
     setHandChoose(true)
     setFocusPosition(index+1)
+    setSelectionStart(index)
+    setSelectionEnd(index+1)
     if(inputRef) inputRef.current.focus()
   }
 
@@ -59,15 +72,17 @@ const ForeLetterInput:React.FC<ForeLetterInputProps> = ({num=4,value,onChange,fo
   
   return (
     <View className={Styles.foreLetter}>{
-      defaultArr.map((v,index)=>{
+      defaultArr.map((_,index)=>{
         let active = false
         if(showCursor){
           // if(handChoose){
           //   active = index === focusPosition-1
           // }else{
-            if(val.length<num){
-              const activeIndex = val?val.length:0
-              active = index===activeIndex
+            if(focusPosition===0 && val.length<num){
+                const activeIndex = val?val.length:0
+                active = index===activeIndex
+            }else if(focusPosition!==0 && val.length<num){
+              active = index===focusPosition-1
             }
           // }
         }
@@ -89,8 +104,8 @@ const ForeLetterInput:React.FC<ForeLetterInputProps> = ({num=4,value,onChange,fo
         maxlength={num}
         focus={isFocus}
         cursor={focusPosition}
-        selection-start={focusPosition-1}
-        selection-end={focusPosition}
+        selection-start={selectionStart}
+        selection-end={selectionEnd}
         value={val}
         onInput={onInputChange} 
         disabled={disabled}
