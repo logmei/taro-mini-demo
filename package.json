@@ -1,8 +1,9 @@
 {
-  "name": "demo-app",
-  "version": "1.0.0",
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
+  "author": "{{author}}",
   "private": true,
-  "description": "小程序",
   "templateInfo": {
     "name": "taro-ui",
     "typescript": true,
@@ -35,7 +36,6 @@
     "Android >= 4.1",
     "ios >= 8"
   ],
-  "author": "",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@tarojs/cli": "3.0.21",
