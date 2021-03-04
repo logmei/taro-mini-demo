@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-commonjs
+const path = require('path');
+
 const config = {
   projectName: 'tms-driver-app',
   date: '2020-12-25',
@@ -59,6 +62,9 @@ const config = {
         }
       }
     }
+  },
+  alias: {
+    '@':path.resolve(__dirname, '..', 'src')
   }
 }
 
