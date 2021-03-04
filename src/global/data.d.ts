@@ -3,7 +3,6 @@ export interface UrlType{
   auth?:string;
 }
 
-
 export interface WxuserInfoProps {
   avatarUrl: string
   city: string

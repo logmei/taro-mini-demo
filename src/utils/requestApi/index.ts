@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import { RequestOptParams } from '../../global/data';
+import log from '../log';
 import Config from './config'
 
 const { request, uploadFile } = Taro
@@ -41,7 +42,8 @@ const interceptor = function (chain) {
   return chain.proceed(requestParams)
     .then(response => {
       // console.log(`http <-- ${url} result:`, response)
-
+      log.setFilterMsg('response')
+      log.info(response)
       //返回解析后的数据
       if (response.statusCode === 200 || response.statusCode === 204) {
         return response.data;
@@ -64,19 +66,22 @@ const interceptor = function (chain) {
           icon:'none',
           duration:2000
         })
+        log.error(response.data)
         return Promise.reject(response.data);
       }else {
         //统一处理错误,或者返回 reject
+        log.error(response.data)
         return Promise.reject(response.data);
       }
       return response
     }).catch(err => {
       //  if(data.loading === true && !loading) Taro.hideLoading()
-      Taro.atMessage({
-        'message': err,
-        'type': 'error',
+      Taro.showToast({
+        title: err,
+        icon:'none',
+        duration:2000
       })
-      throw err;
+      log.error(err);
       return Promise.reject(err);
     });
   }
@@ -87,14 +92,14 @@ const Request:any = async (url:string,option:RequestOptParams,rest?:any)=>{
   const wholeUrl = apiUrl + url;
   const method = (options && options.method) ? options.method : 'get'
   const authorization = Taro.getStorageSync('access_token')
-  const companyId = Taro.getStorageSync('companyId')
   //'application/x-www-form-urlencoded'
   const header = {
     'content-type': options.contentType || 'application/json',
     'authorization':authorization,
-    'end':'driver',
-    'companyId':companyId
   }
+  log.setFilterMsg('request')
+  log.info('request:'+wholeUrl,'authorization:'+authorization,'params:'+JSON.stringify(options.data))
+
   return await request({
     header,
     method,
@@ -112,23 +117,26 @@ const UploadFileApi = async (url:string,option:RequestOptParams,rest?:any)=>{
   const options = {...option}
   const wholeUrl = apiUrl + url;
   const authorization = Taro.getStorageSync('access_token')
-  const companyId = Taro.getStorageSync('companyId')
   const header = {
     'content-type': 'multipart/form-data',
     'authorization':authorization,
     'end':'driver',
-    'companyId':companyId
   }
   // Taro.showModal({
   //   content:'调用地址'+wholeUrl
   // })
+  log.setFilterMsg('request')
+  log.info('UploadRequest:'+wholeUrl,'authorization:'+authorization,'params:'+JSON.stringify(options.data))
   return await uploadFile({
     header,
     url:wholeUrl,
     name:'file',
     formData: { ...options.data },
-    filePath:option.filePath || ''
+    filePath:option.filePath || '',
+    ...rest
   }).then(response=>{
+    log.setFilterMsg('response')
+    log.info(response)
     // Taro.showModal({
     //   content:'返回结果'+JSON.stringify(response)
     // })
@@ -154,16 +162,20 @@ const UploadFileApi = async (url:string,option:RequestOptParams,rest?:any)=>{
         icon:'none',
         duration:2000
       })
+      log.error(response.data)
       return Promise.reject(response.data);
     }else {
+      log.error(response.data)
       //统一处理错误,或者返回 reject
       return Promise.reject(response.data);
     }
     return response
   }).catch(err=>{
-    Taro.atMessage({
-      'message': err,
-      'type': 'error',
+    log.error(err)
+    Taro.showToast({
+      title:err,
+      icon:'none',
+      duration:2000
     })
   });
 }

@@ -1,7 +1,23 @@
-dist/
-deploy_versions/
-.temp/
-.rn_temp/
-node_modules/
+
+
+# Mac OS
 .DS_Store
 .history
+
+# IDE
+.idea
+.project
+
+
+# npm
+node_modules
+npm-debug.log
+yarn-error.log
+
+# folder
+dist
+# 自动更新目录，不要修改此目录里面的内容
+src/app
+.yo-rc.json
+package-lock.json
+

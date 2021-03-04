@@ -1,7 +1,7 @@
 export default {
   // 编译环境  测试
   development:{
-    apiUrl:'',
+    apiUrl:'http://localhost:3000',
     authUrl:'',
     prefix:''
   },
@@ -12,7 +12,7 @@ export default {
   },
   // 开发版
   develop:{
-    apiUrl:'',
+    apiUrl:'http://localhost:3000',
     authUrl:'',
     prefix:''
   },
