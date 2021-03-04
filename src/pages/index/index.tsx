@@ -29,7 +29,7 @@ const Index:React.FC<IndexProps> = ({name,dispatch})=>{
       <View className='index'>
         <Text>---{name}---</Text>
         <AtButton type='primary'>I need Taro UI</AtButton>
-        <Text>Taro UI 支持 Vue 了吗？</Text>
+        <Text>Taro UI</Text>
         <AtButton type='primary' circle>支持</AtButton>
         <Text>共建？</Text>
         <AtButton type='secondary' circle>来</AtButton>

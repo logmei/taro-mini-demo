@@ -56,7 +56,7 @@ const interceptor = function (chain) {
   }
 Taro.addInterceptor(interceptor)
 
-const Request = async (url:string,options:RequestOptParams,rest)=>{
+const Request = async (url:string,options:RequestOptParams,rest?:any)=>{
   const wholeUrl = Config[process.env.NODE_ENV] + url;
   const method = options.method ? options.method : 'get'
   const header = {
