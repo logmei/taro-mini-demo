@@ -21,8 +21,12 @@ const Index:React.FC<{}> = ()=>{
       console.log('login response',res)
       Taro.showToast({
         title:res,
-        icon:'success'
+        icon:'success',
+        success:()=>{
+          Taro.navigateTo({url:'/pages/index/index'})
+        }
       })
+
     })
   }
   const handlerReset = ()=> {

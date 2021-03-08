@@ -63,7 +63,7 @@ const SpecialInput:React.FC<SpecialInputProps> = ({num,value,onChange,focus,disa
     }
     if(value!==undefined) setVal(value)
   },[num, value])
-  
+
   return (
     <View className={Styles.specialInput}>
       {
@@ -81,8 +81,8 @@ const SpecialInput:React.FC<SpecialInputProps> = ({num,value,onChange,focus,disa
             }
           // }
         }
-          return <Label 
-            key={'num'+index} 
+          return <Label
+            key={'num'+index}
             className={`${Styles.code} ${active?Styles.active:''} ${handChoose && index === focusPosition-1?Styles.selected:''}`}
             onClick={()=>HandlerClick(index)}
           >
@@ -90,10 +90,10 @@ const SpecialInput:React.FC<SpecialInputProps> = ({num,value,onChange,focus,disa
           // return <AtInput id={`num${index}`} maxlength={1} className={Styles.input} value={v} name={`num${index}`} key={index} type="number" onChange={(input)=>onInputChange(input,index)}></AtInput>
         })
       }
-      <Input 
+      <Input
         ref={inputRef}
-        className={Styles.hideInput} 
-        type='number' 
+        className={Styles.hideInput}
+        type='number'
         maxlength={num}
         focus={isFocus}
         cursor={focusPosition}
@@ -101,7 +101,7 @@ const SpecialInput:React.FC<SpecialInputProps> = ({num,value,onChange,focus,disa
         selection-end={selectionEnd}
         value={val}
         disabled={disabled}
-        onInput={onInputChange} 
+        onInput={onInputChange}
       ></Input>
     </View>
   )
