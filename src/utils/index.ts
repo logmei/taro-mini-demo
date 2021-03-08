@@ -1,7 +1,5 @@
 import Taro from '@tarojs/taro'
 import { Page } from "@/global/data";
-import { getOpenidFromService, getUserInfo, loginByOpenidService } from '@/service/login';
-import { reject } from 'lodash';
 
 export const getTenantId=()=>{
   const userInfo = Taro.getStorageSync('userInfo')
@@ -62,11 +60,11 @@ export const autoLogin=()=>{
   const openId = Taro.getStorageSync('wxAppletOpenid')
     if(!openId){
       Taro.login({
-        success:(res)=>{
-          getOpenidFromService({code:res.code,end:'driver'}).then((result)=>{
-            Taro.setStorageSync('wxAppletOpenid',result.openid)
-            loginFun(result.openid)
-          })
+        success:()=>{
+          // getOpenidFromService({code:res.code,end:'driver'}).then((result)=>{
+          //   Taro.setStorageSync('wxAppletOpenid',result.openid)
+          //   loginFun(result.openid)
+          // })
         }
       })
     } else {
@@ -76,30 +74,13 @@ export const autoLogin=()=>{
 }
 
 const loginFun = (openId:string)=>{
-  loginByOpenidService({
-    client_id: 'client',//string Y 客户端名称
-    grant_type: 'openid', //string Y 授权类型，分implicit和password两种
-    open_id: openId,// string N 微信openId，code和open_id两者必传⼀个
-  }).then(res=>{
-    Taro.hideLoading()
-    if (res.success === false) {
-      Taro.redirectTo({
-        url:'/pages/login/index'
-      })
-      // that.setData({ responseData: res.message, prompt: true });
-    } else {
-      Taro.setStorageSync('access_token', res.accessToken);
-      getUserInfo().then(()=>{
-        Taro.switchTab({url:'/pages/index/index'})
-      })
-    }
-  })
+  console.log(openId)
 }
 
 // 判断是否登陆
 export const isLogin=()=>{
   debugger
-  return new Promise((resovle,reject)=>{
+  return new Promise((resovle)=>{
     const UserInfo = Taro.getStorageSync('userInfo')
     if(!UserInfo){
       resovle(false)

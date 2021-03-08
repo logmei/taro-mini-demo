@@ -23,6 +23,7 @@ interface IndexProps{
 const Index:React.FC<IndexProps> = ({name,dispatch})=>{
 
   useEffect(()=>{
+
       dispatch({
       type:'common/saveStorageSync',
       payload:{
