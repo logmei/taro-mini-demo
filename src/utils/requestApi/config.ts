@@ -1,9 +1,11 @@
 export default {
+  // 编译环境  测试
   development:{
-    apiUrl:'',
+    apiUrl:'http://localhost:3000',
     authUrl:'',
     prefix:''
   },
+  // 编译环境  正式
   production:{
     apiUrl:'',
     authUrl:'',

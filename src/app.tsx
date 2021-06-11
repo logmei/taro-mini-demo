@@ -5,7 +5,7 @@ import React, {Component } from 'react'
 import {Provider} from 'react-redux'
 import dva from './utils/dva'
 import models from './models/index'
-
+import 'taro-ui/dist/style/index.scss'
 // 全局样式
 // import './styles/base.scss'
 

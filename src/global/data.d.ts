@@ -3,8 +3,18 @@ export interface UrlType{
   auth?:string;
 }
 
+export interface WxuserInfoProps {
+  avatarUrl: string
+  city: string
+  country: string
+  gender: string
+  language: string
+  nickName: string
+  province: string
+}
+
 export interface RequestOptParams extends Object{
-  data:Object,
+  data?:Object,
   method?:string,
   urlType?:string,
   filePath?:string;
