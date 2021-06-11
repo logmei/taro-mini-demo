@@ -1,0 +1,75 @@
+
+.LTimeLineStyle{
+  background-color: #fff;
+  padding: 34px 30px;
+  border-radius: 16px;
+  .item{
+    font-size: 26px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #B8B8B8;
+    line-height: 36px;
+    display: flex;
+    &:first-child{
+      color: #333;
+    }
+    &:last-of-type{
+      .middle{
+        .line{
+          background-color: transparent !important;
+        }
+      }
+
+    }
+    .left{
+      text-align: center;
+      white-space: nowrap;
+      margin-right: 30px;
+      min-width: 70px;
+    }
+    .middle{
+      position: relative;
+      width: 62px;
+      margin-right: 32px;
+      flex-shrink: 0;
+      .line{
+        height: 100%;
+        width: 2px;
+        background-color: #D8D8D8;
+        margin: auto;
+      }
+      .icon{
+        position:absolute;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .point{
+          margin: auto;
+          width: 12px;
+          height: 12px;
+          background-color: #D8D8D8;
+          border-radius: 50%;
+        }
+        image{
+          width: 50px;
+          height: 50px;
+          position: relative;
+          top: -4px;
+        }
+      }
+    }
+
+    .right{
+      position: relative;
+      top: -10px;
+      .title{
+        margin-bottom: 12px;
+      }
+      .content{
+        margin-bottom: 32px;
+      }
+    }
+  }
+}

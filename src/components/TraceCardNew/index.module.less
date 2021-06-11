@@ -1,0 +1,76 @@
+.listColor{
+  color: #266FFF !important;
+}
+.progress{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  overflow: hidden;
+  .status{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    // height: 106rpx;
+    white-space: nowrap;
+    .content{
+      position: relative;
+
+      .title{
+        font-size: 24px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        line-height: 24px;
+        padding: 6px 12px;
+        background: #CFDBFF;
+        border-radius: 18px;
+      }
+
+    }
+   }
+   .status_active{
+     color: #333333;
+     .content{
+       position: relative;
+      .title{
+        color: #fff;
+        background: #266FFF;
+      }
+      &::after{
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: #266FFF;
+        border-radius: 50%;
+        bottom: -15px;
+      }
+
+    }
+   }
+
+
+
+  .line{
+    width: 100%;
+    height: 2rpx;
+    align-self: center;
+    margin-left: 0px;
+    margin-right: -0px;
+    mask:url('./images/line.svg');
+    background-color: #266FFF;
+  }
+  .line:first-child{
+    width: 88px;
+    margin-left: 0px;
+    margin-right: 0px;
+    mask:url('./images/line.svg');
+    background-color: #B8B8B8;
+  }
+
+
+}
+
+
