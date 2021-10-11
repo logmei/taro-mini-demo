@@ -1,3 +1,5 @@
+import { CommonState } from "@/models/common";
+
 export interface UrlType{
   api?:string;
   auth?:string;
@@ -37,4 +39,8 @@ export interface Page{
   totalPages:number;
   totalElements:number;
   numberOfElements?:number
+}
+
+export interface ModelState {
+  common: CommonState
 }

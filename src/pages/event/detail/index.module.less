@@ -1,0 +1,69 @@
+@import '../../../base.less';
+
+page{
+  box-sizing: border-box;
+  height: 100%;
+}
+.index{
+  box-sizing: border-box;
+  background-color: @base-page-color;
+  position: relative;
+  height: 100%;
+    .image{
+      background-color: #fff;
+      text-align: center;
+      padding: 20px;
+      image{
+        box-shadow: 0 0 20px rgb(198, 198, 198);
+        border-radius: 10px;
+        height: 300px;
+      }
+      .numbers{
+        color: @title-font-color;
+        font-size: 20px;
+      }
+    }
+
+    .content{
+      margin: 20px;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+  .floatButtons{
+    position: absolute;
+    right: 0;
+    bottom: 100px;
+    width: 160px;
+    height: 110px;
+    box-shadow: 0 0 10px rgb(198, 198, 198);
+    border-top-left-radius: 110px;
+    border-bottom-left-radius: 110px;
+    background-color: #fff;
+
+    .photo{
+      margin-left: 20px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .background{
+        background-color: @primary-color;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .photoIcon{
+        font-size: 40px;
+        color: #fff;
+      }
+    }
+  }
+}

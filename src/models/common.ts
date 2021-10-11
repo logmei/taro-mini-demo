@@ -1,4 +1,9 @@
+import { testService } from '@/service/login';
 import Taro from '@tarojs/taro';
+
+export interface CommonState{
+  name: string
+}
 
 export default {
   namespace: 'common', // 这是模块名
@@ -24,9 +29,30 @@ export default {
         payload,// 参数
       })
     },
-    * test({payload,cb},{call,put}){
-      console.log(payload)
-      cb && cb();
+    * test({payload,cb},{call,put,select}){
+    Taro.showLoading({title:'加载中'})
+      const state = yield select(models=>{
+        return models.common
+      })
+      console.log('state',state)
+      const response = yield call(testService,{imageSrc:payload.imageSrc})
+      Taro.hideLoading()
+      if(!response) Taro.showToast({title:'接口调用出错，请联系管理员'})
+      if(response.success){
+        if(response.rows.length===0) {
+          Taro.showToast({title:'失败',icon:'none'})
+          return
+        }
+        console.log(payload)
+        yield put({
+          type: 'save',
+          payload: {
+            name : state.name+'-'+response.value
+          }
+        })
+        cb && cb();
+      }
+
     }
   },
 

@@ -10,3 +10,9 @@ export async function LoginService(params){
     }
   })
 }
+
+export async function testService(params:any) {
+  return new Promise(resolve=>{
+    resolve({success:true,message:'success',value:'test'})
+  })
+}
