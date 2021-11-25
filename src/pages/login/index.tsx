@@ -1,41 +1,29 @@
-<<<<<<< HEAD
 import { View } from '@tarojs/components'
-import { useDidHide, useDidShow, useReady } from '@tarojs/taro'
-import React, { useEffect } from 'react'
-
-const Index:React.FC<{}> = ()=>{
-=======
-
-import { LoginService } from '@/service/login'
-import { View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import Taro, { useDidHide, useDidShow, useReady } from '@tarojs/taro'
 import React, { useEffect, useState } from 'react'
 import { AtButton, AtForm, AtInput } from 'taro-ui'
 import Style from './index.module.less'
 
 const Index:React.FC<{}> = ()=>{
-
-  const [name,setName] = useState('')
-  const [pwd,setPwd] = useState('')
-
->>>>>>> _components
+  const [name, setName] = useState('')
+  const [pwd, setPwd] = useState('')
   useEffect(()=>{
     console.log('useEffect')
   },[])
 
   const handlerSubmit = ()=>{
     console.log(`submit:name-${name},pwd-${pwd}`)
-    LoginService({name,pwd}).then(res=>{
-      console.log('login response',res)
-      Taro.showToast({
-        title:res,
-        icon:'success',
-        success:()=>{
-          Taro.navigateTo({url:'/pages/index/index'})
-        }
-      })
+    // LoginService({name,pwd}).then(res=>{
+    //   console.log('login response',res)
+    //   Taro.showToast({
+    //     title:res,
+    //     icon:'success',
+    //     success:()=>{
+    //       Taro.navigateTo({url:'/pages/index/index'})
+    //     }
+    //   })
 
-    })
+    // })
   }
   const handlerReset = ()=> {
     console.log('onReset')
