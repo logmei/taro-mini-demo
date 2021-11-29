@@ -1,0 +1,53 @@
+@import '../../base.less';
+
+.bottomButton{
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 0;
+  left: 0;
+  height: 128px;
+  padding: 14px;
+  width: 100%;
+  background-color: #fff;
+  .addIcon{
+    width: 36px;
+    height: 36px;
+    margin-right: 18px;
+  }
+}
+
+
+.__page{
+  height: 100%;
+  background-color: @base-page-color;
+  box-sizing: border-box;
+  padding: 20px 24px;
+}
+
+.__line{
+  height: 2px;
+  width: 100%;
+  background-color: #e8e8e8;
+}
+
+.imagePicker{
+  :global{
+    .at-image-picker__choose-btn{
+      background: #E8E8E8;
+      border: 0px solid;
+    }
+    .at-image-picker__choose-btn .add-bar{
+      background-color: #fff;
+    }
+  }
+}
+
+.upload{
+  .label{
+    font-size: 28px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #535353;
+    line-height: 44px;
+  }
+}

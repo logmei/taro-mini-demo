@@ -24,10 +24,10 @@ export default {
         payload,// 参数
       })
     },
-    * test({payload,cb},{call,put}){
-      console.log(payload)
-      cb && cb();
-    }
+    // * test({payload,cb},{call,put}){
+    //   console.log(payload)
+    //   cb && cb();
+    // }
   },
 
   reducers: { // 同步方法

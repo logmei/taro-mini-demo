@@ -5,3 +5,9 @@ export const UrlType={
 }
 
 
+export const PageConstants = {
+  current: 1,
+  size: 20,
+}
+
+

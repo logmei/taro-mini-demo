@@ -20,13 +20,6 @@ export const formatTime = (time: string) => {
   return `${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`
 }
 
-// 是否继续进行分页操作
-export const isProceedWithPage = (page: Page, current: number, refresh?: boolean | undefined) => {
-  if (refresh) return true
-  if (page.totalPages === 0) return true
-  if (page.totalPages === current - 1) return false
-  return true
-}
 
 // 获取用户信息
 export const getUserInfoHandler = (v?: any) => {

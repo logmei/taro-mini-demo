@@ -1,0 +1,60 @@
+
+@import '../../../../base.less';
+@import '../../common.less';
+
+page{
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.form{
+  position: relative;
+  .__page;
+  .content{
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 26px 22px;
+
+    .statusCard{
+      padding: 24px 0;
+      text-align: center;
+    }
+    .line{
+      .__line;
+      margin-bottom: 18px;
+    }
+    .inputPlaceholder{
+      font-size: 28px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #C8C9CC;
+      line-height: 28px;
+    }
+
+    .ImagePickerNochoose{
+      :global{
+        .at-image-picker__flex-box:nth-of-type(3){
+          display: none;
+        }
+        .at-image-picker__choose-btn{
+          display: none;
+        }
+      }
+    }
+    .label{
+      margin-bottom: 20px;
+    }
+  }
+
+  .footerBtnWrap{
+    .bottomButton
+  }
+
+  .imagePicker;
+
+  :global{
+    .at-image-picker__remove-btn{
+      display: none;
+    }
+  }
+}
