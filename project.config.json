@@ -1,7 +1,7 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "{{name}}",
-	"description": "{{description}}",
+	"projectname": "logmei-taro-model",
+	"description": "小程序框架模板",
 	"appid": "touristappid",
 	"setting": {
 		"urlCheck": true,

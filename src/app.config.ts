@@ -1,7 +1,12 @@
 export default {
+  entryPagePath:'pages/noTopNavDemo/index',
   pages: [
     'pages/login/index',
-    'pages/index/index'
+    'pages/index/index',
+    'pages/noTopNavDemo/index',
+    'pages/list/index',
+    'pages/list/detail/index',
+    'pages/list/form/index'
   ],
   window: {
     backgroundTextStyle: 'light',

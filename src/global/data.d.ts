@@ -1,4 +1,4 @@
-import { FreightModelState } from "@/models/freight";
+
 
 export interface UrlType{
   api?:string;
@@ -41,10 +41,31 @@ export interface ResponseProps {
 
 
 export interface ConnectStates{
-  freightModel:FreightModelState
+  loading:Loading,
+  common:CommonState
+}
+
+export interface CommonState{
+  name:string;
+  accessToken:string;
+  isSubscribe:string;
+  formData:any
 }
 
 
+
+export interface Loading {
+  global: boolean;
+  effects: { [key: string]: boolean | undefined };
+  models: {
+    global?: boolean;
+    menu?: boolean;
+    setting?: boolean;
+    user?: boolean;
+    login?: boolean;
+    printBillList?: boolean;
+  };
+}
 export interface AnyAction extends Action {
   // Allows any extra properties to be defined in an action.
   [extraProps: string]: any

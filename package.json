@@ -1,8 +1,8 @@
 {
-  "name": "{{name}}",
-  "version": "{{version}}",
-  "description": "{{description}}",
-  "author": "{{author}}",
+  "name": "logmei-taro-model",
+  "version": "1.2.0",
+  "description": "小程序框架模板",
+  "author": "logmei",
   "private": true,
   "templateInfo": {
     "name": "taro-ui",

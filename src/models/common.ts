@@ -6,6 +6,7 @@ export default {
     name:'111',
     accessToken: Taro.getStorageSync('accessToken') || '',
     isSubscribe: !!Taro.getStorageSync('isSubscribe'),
+    formData:null
   },
 
   effects: {

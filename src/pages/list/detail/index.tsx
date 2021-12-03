@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import moment from 'moment';
 import { AtImagePicker } from 'taro-ui';
-import { getPassingDetail } from '@/service/siteManage';
 import { View } from '@tarojs/components'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import styles from './index.module.less'
-import StatusCard, { StatusCardProps } from '../../components/StatusCard';
-import DetailRows from '../../components/DetailRows';
-import { DetailColumnsPassing, statusMap } from '../../columns';
-import { passingPersonProps } from '../../data';
-import FormImage from '../../components/FormImage';
+import StatusCard, { StatusCardProps } from '../components/StatusCard';
+import DetailRows from '../components/DetailRows';
+import { statusMap } from '../columns';
+import { passingPersonProps } from '../data';
+import FormImage from '../components/FormImage';
+import { columnsPass, dataTest } from '../components/Card/columns';
 
 
 
@@ -31,14 +30,7 @@ const RentControl = () => {
 
   const getDetailData = ()=>{
    console.log('id',Taro.getCurrentInstance().router?.params.id)
-    getPassingDetail({ id:Taro.getCurrentInstance().router?.params.id}).then(res=>{
-      setdata(res)
-      setstatusData({
-        status:statusMap[res.status || 4],
-        code:res.applyNo || '',
-        time: res.applyDate?moment(res.applyDate).format('yyyy-MM-DD'):''
-      })
-    })
+
   }
 
 
@@ -63,7 +55,7 @@ const RentControl = () => {
       <View className={styles.content}>
       <StatusCard className={styles.statusCard} {...statusData}></StatusCard>
       <View className={styles.line}></View>
-      <DetailRows data={data} columns={DetailColumnsPassing}></DetailRows>
+      <DetailRows data={dataTest} columns={columnsPass}></DetailRows>
       <FormImage title="头像" onClick={showPic} url={data?.headImg} imageName="head"></FormImage>
 
       <View className={styles.upload}>
