@@ -1,5 +1,5 @@
 export default {
-  entryPagePath:'pages/noTopNavDemo/index',
+  entryPagePath:'pages/index/index',
   pages: [
     'pages/login/index',
     'pages/index/index',
